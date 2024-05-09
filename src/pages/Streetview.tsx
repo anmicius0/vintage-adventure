@@ -2,12 +2,20 @@ import { IonButton, IonCard } from "@ionic/react";
 import React, { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { Loader } from "@googlemaps/js-api-loader";
-import { get_street_view, resizeImage } from "../utils/utils";
-import Layout from "../template/Layout";
+import { get_street_view } from "../utils/utils";
 
-const Streetview: React.FC = () => {
+interface StreetviewProps {
+  setTitle: (title: string) => void;
+  setLoading: (loading: boolean) => void;
+  setProgress: (progress: number) => void;
+}
+
+const Streetview: React.FC<StreetviewProps> = ({
+  setTitle,
+  setLoading,
+  setProgress,
+}) => {
   const history = useHistory();
-
   const location = useLocation<string>();
   const searchParams = new URLSearchParams(location.search);
   const lat = searchParams.get("lat")!;
@@ -18,15 +26,18 @@ const Streetview: React.FC = () => {
   const [pitch, setPitch] = useState<number>(0);
 
   const onCapture = async () => {
-    let image = await get_street_view(panoID, heading, pitch);
-    image = await resizeImage(image);
+    setLoading(true);
+    const image = await get_street_view(panoID, heading, pitch);
+    setLoading(false);
     history.push({
       pathname: "/aftereffect",
       state: { image: image },
     });
   };
-
   useEffect(() => {
+    setTitle("第二步：拍照");
+    setProgress(1 / 3);
+
     const loader = new Loader({
       apiKey: (import.meta as any).env.VITE_GMAPS_KEY,
       version: "weekly",
@@ -48,17 +59,15 @@ const Streetview: React.FC = () => {
       });
     };
 
-    init().catch((error) => {
+    init().catch(error => {
       console.error("Error initializing StreetViewPanorama:", error);
     });
   }, []);
 
   return (
-    <Layout title="第二步：拍照">
+    <>
       <IonCard>
-        <div>
-          <div id="pano" style={{ height: "500px" }}></div>
-        </div>
+        <div id="pano" style={{ height: "500px" }}></div>
       </IonCard>
 
       <IonButton
@@ -69,8 +78,8 @@ const Streetview: React.FC = () => {
       >
         截圖
       </IonButton>
-    </Layout>
+    </>
   );
 };
 
-export default Streetview;
+export default React.memo(Streetview);

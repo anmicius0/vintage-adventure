@@ -17,7 +17,7 @@ export const find_place = async (query: string): Promise<string> => {
 export const get_street_view = async (
   panoID: string,
   heading: number,
-  pitch: number,
+  pitch: number
 ): Promise<Blob> => {
   const res = await fetch(`${API_URL}/static-streetview`, {
     method: "POST",
@@ -30,13 +30,19 @@ export const get_street_view = async (
       pitch: pitch.toString(),
     }),
   });
-  return new Blob([await res.arrayBuffer()], { type: "image/jpeg" });
+  return await resizeImage(
+    new Blob([await res.arrayBuffer()], { type: "image/jpeg" })
+  );
 };
 
 // Aftereffect.tsx
-export const voice_to_text = async (audio: Blob): Promise<string> => {
+export const voice_to_text = async (
+  audio: Blob,
+  taiwanese: Boolean
+): Promise<string> => {
   const formData = new FormData();
   formData.append("audio", audio, "audio.ogg");
+  formData.append("language", taiwanese ? "tw" : "zh");
   const res = await fetch(`${API_URL}/stt`, {
     method: "POST",
     body: formData,
@@ -59,7 +65,7 @@ export const prompt_to_prompt = async (text: string): Promise<string> => {
 
 export const image_to_image = async (
   image: Blob,
-  prompt: string,
+  prompt: string
 ): Promise<Blob> => {
   const formData = new FormData();
   formData.append("image", image, "image.jpeg");
@@ -68,12 +74,12 @@ export const image_to_image = async (
     method: "POST",
     body: formData,
   });
-  return new Blob([await res.arrayBuffer()], { type: "image/png" });
+  return new Blob([await res.arrayBuffer()], { type: "image/jpeg" });
 };
 
 export const to_video = async (image: Blob, audio: Blob): Promise<Blob> => {
   const formData = new FormData();
-  formData.append("image", image, "image.png");
+  formData.append("image", image, "image.jpeg");
   formData.append("audio", audio, "audio.ogg");
   const res = await fetch(`${API_URL}/to-video`, {
     method: "POST",
@@ -82,7 +88,7 @@ export const to_video = async (image: Blob, audio: Blob): Promise<Blob> => {
   return new Blob([await res.arrayBuffer()], { type: "video/mp4" });
 };
 
-export const resizeImage = (imageBlob: Blob): Promise<Blob> => {
+const resizeImage = (imageBlob: Blob): Promise<Blob> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.src = URL.createObjectURL(imageBlob);
@@ -97,7 +103,7 @@ export const resizeImage = (imageBlob: Blob): Promise<Blob> => {
           resolve(blob!);
         },
         "image/jpeg",
-        1,
+        1
       );
     };
     img.onerror = (err) => {
