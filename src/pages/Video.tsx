@@ -1,7 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { IonButton, IonCard } from "@ionic/react";
 import { useEffect, useState } from "react";
-import { RWebShare } from "react-web-share";
 import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
 

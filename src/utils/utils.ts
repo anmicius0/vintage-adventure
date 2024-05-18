@@ -41,7 +41,7 @@ export const voice_to_text = async (
   taiwanese: Boolean
 ): Promise<string> => {
   const formData = new FormData();
-  formData.append("audio", audio, "audio.ogg");
+  formData.append("audio", audio, "audio.webm");
   formData.append("language", taiwanese ? "tw" : "zh");
   const res = await fetch(`${API_URL}/stt`, {
     method: "POST",
@@ -99,14 +99,14 @@ const resizeImage = (imageBlob: Blob): Promise<Blob> => {
       canvas.height = 1024;
       ctx!.drawImage(img, 0, 0, 1024, 1024);
       canvas.toBlob(
-        (blob) => {
+        blob => {
           resolve(blob!);
         },
         "image/jpeg",
         1
       );
     };
-    img.onerror = (err) => {
+    img.onerror = err => {
       reject(err);
     };
   });

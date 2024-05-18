@@ -5,7 +5,7 @@ import million from "million/compiler";
 
 const ReactCompilerConfig = {
   compilationMode: "annotation",
-  sources: (filename) => {
+  sources: filename => {
     return filename.indexOf("src/path/to/dir") !== -1;
   },
 };

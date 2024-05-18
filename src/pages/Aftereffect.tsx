@@ -1,10 +1,8 @@
 import {
   IonButton,
   IonTextarea,
-  IonText,
   IonImg,
   IonCard,
-  IonToggle,
   useIonLoading,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
@@ -15,8 +13,7 @@ import {
   to_video,
   voice_to_text,
 } from "../utils/utils";
-import { AudioRecorder } from "react-audio-voice-recorder";
-import { SaveSharp } from "react-ionicons";
+import AudioRecorder from "../components/audioRecorder";
 
 interface AftereffectProps {
   setTitle: (title: string) => void;
@@ -36,20 +33,11 @@ const Aftereffect: React.FC<AftereffectProps> = ({
 
   const [prompt, setPrompt] = useState<string>("");
   const [recording, setRecording] = useState<Blob>();
-  const [taiwanese, setTaiwanese] = useState<Boolean>(false);
   const [present, dismiss] = useIonLoading();
   const {
     state: { image: originalImg },
   } = useLocation() as { state: { image: Blob } };
   const history = useHistory();
-
-  const processVoice = async (audio: Blob) => {
-    present("AI轉文字中...");
-    setRecording(audio);
-    const transcript = await voice_to_text(audio as Blob, taiwanese);
-    setPrompt(transcript);
-    dismiss();
-  };
 
   const stableGen = async () => {
     setLoading(true);
@@ -81,7 +69,7 @@ const Aftereffect: React.FC<AftereffectProps> = ({
         ) : null}
 
         {/* Voice  */}
-        {prompt && recording ? (
+        {prompt ? (
           <>
             <IonTextarea
               label="輸入故事區"
@@ -101,45 +89,13 @@ const Aftereffect: React.FC<AftereffectProps> = ({
             >
               生成影片
             </IonButton>
-            <IonButton
-              color="secondary"
-              expand="block"
-              fill="outline"
-              onClick={() => {
-                setRecording(undefined);
-                setPrompt("");
-              }}
-            >
-              重錄語音
-            </IonButton>
           </>
-        ) : (
-          <>
-            <IonText style={{ fontSize: ".8rem" }}>
-              按
-              <SaveSharp
-                style={{
-                  width: "0.8rem",
-                  verticalAlign: "text-top",
-                  margin: "0.1rem",
-                }}
-              />
-              結束錄音
-            </IonText>
-            <IonToggle
-              color="secondary"
-              style={{ margin: "2rem" }}
-              onClick={() => setTaiwanese(!taiwanese)}
-            >
-              台語
-            </IonToggle>
-            <AudioRecorder
-              onRecordingComplete={(audio: Blob) => {
-                processVoice(audio);
-              }}
-            />
-          </>
-        )}
+        ) : null}
+        <AudioRecorder
+          setPrompt={setPrompt}
+          setRecording={setRecording}
+          recording={recording}
+        />
       </div>
     </>
   );

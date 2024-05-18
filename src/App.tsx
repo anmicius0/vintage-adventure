@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useMemo } from "react";
+import React, { Suspense, useState } from "react";
 import { Route } from "react-router-dom";
 import {
   IonApp,
@@ -44,10 +44,6 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
 
-  const setTitleMemo = useMemo(() => setTitle, []);
-  const setLoadingMemo = useMemo(() => setLoading, []);
-  const setProgressMemo = useMemo(() => setProgress, []);
-
   return (
     <IonApp>
       <IonPage>
@@ -65,15 +61,15 @@ const App: React.FC = () => {
         <IonContent>
           <IonReactRouter>
             <IonRouterOutlet>
-              <Suspense fallback={<div>載入中...</div>}>
+              <Suspense>
                 <Route
                   exact
                   path="/"
                   component={() => (
                     <Home
-                      setTitle={setTitleMemo}
-                      setLoading={setLoadingMemo}
-                      setProgress={setProgressMemo}
+                      setTitle={setTitle}
+                      setLoading={setLoading}
+                      setProgress={setProgress}
                     />
                   )}
                 />
@@ -82,9 +78,9 @@ const App: React.FC = () => {
                   path="/streetview"
                   component={() => (
                     <Streetview
-                      setTitle={setTitleMemo}
+                      setTitle={setTitle}
                       setLoading={setLoading}
-                      setProgress={setProgressMemo}
+                      setProgress={setProgress}
                     />
                   )}
                 />
@@ -93,9 +89,9 @@ const App: React.FC = () => {
                   path="/aftereffect"
                   component={() => (
                     <Aftereffect
-                      setTitle={setTitleMemo}
-                      setLoading={setLoadingMemo}
-                      setProgress={setProgressMemo}
+                      setTitle={setTitle}
+                      setLoading={setLoading}
+                      setProgress={setProgress}
                     />
                   )}
                 />
@@ -103,10 +99,7 @@ const App: React.FC = () => {
                   exact
                   path="/video"
                   component={() => (
-                    <Video
-                      setTitle={setTitleMemo}
-                      setProgress={setProgressMemo}
-                    />
+                    <Video setTitle={setTitle} setProgress={setProgress} />
                   )}
                 />
               </Suspense>

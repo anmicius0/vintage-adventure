@@ -74,3 +74,8 @@ html {
     https://ionicframework.com/docs/layout/dynamic-font-scaling */
   --ion-dynamic-font: var(--ion-default-dynamic-font);
 }
+
+.recorder-controls {
+  background-color: var(--ion-color-secondary) !important;
+  border-radius: 0.5rem !important;
+}
