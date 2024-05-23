@@ -22,6 +22,7 @@ const AudioRecorder: React.FC<Props> = ({
 
   useEffect(() => {
     if (!recordedBlob) return;
+    setTaiwanese(false);
     processVoice(recordedBlob);
     setRecording(recordedBlob);
   }, [recordedBlob]);
@@ -59,16 +60,18 @@ const AudioRecorder: React.FC<Props> = ({
           </IonToggle>
 
           <VoiceVisualizer
+            // Style
             height="0"
             barWidth={8}
-            ref={audioRef}
             mainBarColor="#212529"
             secondaryBarColor="#212529"
-            controls={recorderControls}
+            controlButtonsClassName="recorder-controls"
             isDefaultUIShown={false}
             isProgressIndicatorShown={false}
+            // Functionality
+            ref={audioRef}
+            controls={recorderControls}
             onlyRecording={true}
-            controlButtonsClassName="recorder-controls"
           />
         </>
       )}
