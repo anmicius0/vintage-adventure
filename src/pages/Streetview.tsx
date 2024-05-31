@@ -74,7 +74,13 @@ const Streetview: React.FC<StreetviewProps> = ({
         color={"secondary"}
         expand={"block"}
         onClick={onCapture}
-        style={{ maxWidth: "20rem", margin: "0 auto", padding: "1rem 1rem" }}
+        style={{
+          maxWidth: "40rem",
+          margin: "0 auto",
+          padding: "1rem 1rem",
+          fontFamily: "Noto Sans TC",
+          fontWeight: "300",
+        }}
       >
         截圖
       </IonButton>

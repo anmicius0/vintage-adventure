@@ -27,12 +27,12 @@ const AudioRecorder: React.FC<Props> = ({
     setRecording(recordedBlob);
   }, [recordedBlob]);
 
-  const processVoice = async (audio: Blob) => {
-    present("AI轉文字中...");
+  const processVoice = async (audio: Blob): Promise<void> => {
+    await present("AI轉文字中...");
     setRecording(audio);
     const transcript = await voice_to_text(audio as Blob, taiwanese);
     setPrompt(transcript);
-    dismiss();
+    await dismiss();
   };
 
   return (

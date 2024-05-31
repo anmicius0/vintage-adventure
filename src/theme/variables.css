@@ -1,81 +1,95 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap");
+@font-face {
+    font-family: 'Noto Sans TC';
+    src: url('/fonts/NotoSansTC-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Noto Serif TC';
+    src: url('/fonts/NotoSerifTC-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /** Ionic CSS Variables **/
 :root {
-  --ion-color-primary: #f8f9fa;
-  --ion-color-primary-rgb: 248, 249, 250;
-  --ion-color-primary-contrast: #000000;
-  --ion-color-primary-contrast-rgb: 0, 0, 0;
-  --ion-color-primary-shade: #dadbdc;
-  --ion-color-primary-tint: #f9fafb;
+    --ion-color-primary: #f8f9fa;
+    --ion-color-primary-rgb: 248, 249, 250;
+    --ion-color-primary-contrast: #000000;
+    --ion-color-primary-contrast-rgb: 0, 0, 0;
+    --ion-color-primary-shade: #dadbdc;
+    --ion-color-primary-tint: #f9fafb;
 
-  --ion-color-secondary: #212529;
-  --ion-color-secondary-rgb: 33, 37, 41;
-  --ion-color-secondary-contrast: #ffffff;
-  --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #1d2124;
-  --ion-color-secondary-tint: #373b3e;
+    --ion-color-secondary: #212529;
+    --ion-color-secondary-rgb: 33, 37, 41;
+    --ion-color-secondary-contrast: #ffffff;
+    --ion-color-secondary-contrast-rgb: 255, 255, 255;
+    --ion-color-secondary-shade: #1d2124;
+    --ion-color-secondary-tint: #373b3e;
 
-  --ion-color-tertiary: #ced4da;
-  --ion-color-tertiary-rgb: 206, 212, 218;
-  --ion-color-tertiary-contrast: #000000;
-  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
-  --ion-color-tertiary-shade: #b5bbc0;
-  --ion-color-tertiary-tint: #d3d8de;
+    --ion-color-tertiary: #ced4da;
+    --ion-color-tertiary-rgb: 206, 212, 218;
+    --ion-color-tertiary-contrast: #000000;
+    --ion-color-tertiary-contrast-rgb: 0, 0, 0;
+    --ion-color-tertiary-shade: #b5bbc0;
+    --ion-color-tertiary-tint: #d3d8de;
 
-  --ion-color-success: #2dd55b;
-  --ion-color-success-rgb: 45, 213, 91;
-  --ion-color-success-contrast: #000000;
-  --ion-color-success-contrast-rgb: 0, 0, 0;
-  --ion-color-success-shade: #28bb50;
-  --ion-color-success-tint: #42d96b;
+    --ion-color-success: #2dd55b;
+    --ion-color-success-rgb: 45, 213, 91;
+    --ion-color-success-contrast: #000000;
+    --ion-color-success-contrast-rgb: 0, 0, 0;
+    --ion-color-success-shade: #28bb50;
+    --ion-color-success-tint: #42d96b;
 
-  --ion-color-warning: #ffc409;
-  --ion-color-warning-rgb: 255, 196, 9;
-  --ion-color-warning-contrast: #000000;
-  --ion-color-warning-contrast-rgb: 0, 0, 0;
-  --ion-color-warning-shade: #e0ac08;
-  --ion-color-warning-tint: #ffca22;
+    --ion-color-warning: #ffc409;
+    --ion-color-warning-rgb: 255, 196, 9;
+    --ion-color-warning-contrast: #000000;
+    --ion-color-warning-contrast-rgb: 0, 0, 0;
+    --ion-color-warning-shade: #e0ac08;
+    --ion-color-warning-tint: #ffca22;
 
-  --ion-color-danger: #c5000f;
-  --ion-color-danger-rgb: 197, 0, 15;
-  --ion-color-danger-contrast: #ffffff;
-  --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: #ad000d;
-  --ion-color-danger-tint: #cb1a27;
+    --ion-color-danger: #c5000f;
+    --ion-color-danger-rgb: 197, 0, 15;
+    --ion-color-danger-contrast: #ffffff;
+    --ion-color-danger-contrast-rgb: 255, 255, 255;
+    --ion-color-danger-shade: #ad000d;
+    --ion-color-danger-tint: #cb1a27;
 
-  --ion-color-light: #f8f9fa;
-  --ion-color-light-rgb: 248, 249, 250;
-  --ion-color-light-contrast: #000000;
-  --ion-color-light-contrast-rgb: 0, 0, 0;
-  --ion-color-light-shade: #dadbdc;
-  --ion-color-light-tint: #f9fafb;
+    --ion-color-light: #f8f9fa;
+    --ion-color-light-rgb: 248, 249, 250;
+    --ion-color-light-contrast: #000000;
+    --ion-color-light-contrast-rgb: 0, 0, 0;
+    --ion-color-light-shade: #dadbdc;
+    --ion-color-light-tint: #f9fafb;
 
-  --ion-color-medium: #ced4da;
-  --ion-color-medium-rgb: 206, 212, 218;
-  --ion-color-medium-contrast: #000000;
-  --ion-color-medium-contrast-rgb: 0, 0, 0;
-  --ion-color-medium-shade: #b5bbc0;
-  --ion-color-medium-tint: #d3d8de;
+    --ion-color-medium: #ced4da;
+    --ion-color-medium-rgb: 206, 212, 218;
+    --ion-color-medium-contrast: #000000;
+    --ion-color-medium-contrast-rgb: 0, 0, 0;
+    --ion-color-medium-shade: #b5bbc0;
+    --ion-color-medium-tint: #d3d8de;
 
-  --ion-color-dark: #212529;
-  --ion-color-dark-rgb: 33, 37, 41;
-  --ion-color-dark-contrast: #ffffff;
-  --ion-color-dark-contrast-rgb: 255, 255, 255;
-  --ion-color-dark-shade: #1d2124;
-  --ion-color-dark-tint: #373b3e;
+    --ion-color-dark: #212529;
+    --ion-color-dark-rgb: 33, 37, 41;
+    --ion-color-dark-contrast: #ffffff;
+    --ion-color-dark-contrast-rgb: 255, 255, 255;
+    --ion-color-dark-shade: #1d2124;
+    --ion-color-dark-tint: #373b3e;
 
-  --ion-font-family: "Noto Serif TC", serif;
-  font-size: 22px;
-}
-
-html {
-  /* For more information on dynamic font scaling, visit the documentation:
-    https://ionicframework.com/docs/layout/dynamic-font-scaling */
-  --ion-dynamic-font: var(--ion-default-dynamic-font);
+    --ion-font-family: "Noto Serif TC", serif;
+    font-size: 20px;
 }
 
 .recorder-controls {
-  background-color: var(--ion-color-secondary) !important;
-  border-radius: 0.5rem !important;
+    background-color: var(--ion-color-secondary) !important;
+    border-radius: 0.5rem !important;
+}
+
+ion-button {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 1rem 1rem;
+    font-family: "Noto Sans TC", sans-serif;
+    font-weight: 300;
 }

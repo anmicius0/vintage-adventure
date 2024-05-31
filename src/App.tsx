@@ -49,7 +49,9 @@ const App: React.FC = () => {
       <IonPage>
         <IonHeader>
           <IonToolbar color="primary">
-            <IonTitle>{title}</IonTitle>
+            <IonTitle style={{ fontFamily: "Noto Sans TC", fontWeight: "300" }}>
+              {title}
+            </IonTitle>
             <IonProgressBar
               type={loading ? "indeterminate" : "determinate"}
               value={progress}
