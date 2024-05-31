@@ -32,7 +32,8 @@
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-voice-visualizer": "^1.8.1",
-    "vite-plugin-babel": "^1.2.0"
+    "vite-plugin-babel": "^1.2.0",
+    "workbox-precaching": "^7.1.0"
   },
   "devDependencies": {
     "@types/canvas-confetti": "^1.6.4",

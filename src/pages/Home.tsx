@@ -41,6 +41,8 @@ const Home: React.FC<HomeProps> = ({ setTitle, setLoading, setProgress }) => {
           maxWidth: "40rem",
           margin: "0 auto",
           padding: "0 1rem",
+          fontFamily: "Noto Sans TC",
+          fontWeight: "300",
         }}
       />
       <IonButton
@@ -49,7 +51,6 @@ const Home: React.FC<HomeProps> = ({ setTitle, setLoading, setProgress }) => {
         onClick={() => {
           if (query) search(query);
         }}
-        style={{ maxWidth: "40rem", margin: "0 auto", padding: "1rem 1rem" }}
       >
         搜尋地點
       </IonButton>
