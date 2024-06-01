@@ -1,16 +1,20 @@
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { IonButton, IonCard } from "@ionic/react";
-import { useEffect, useState } from "react";
+import { IonCard } from "@ionic/react";
 import confetti from "canvas-confetti";
+import ReactPlayer from "react-player";
+
+import Button from "../components/Button";
 
 interface VideoProps {
   setTitle: (title: string) => void;
   setProgress: (progress: number) => void;
 }
+
 const Video: React.FC<VideoProps> = ({ setTitle, setProgress }) => {
   // Confetti
-  var count = 200;
-  var defaults = {
+  const count = 200;
+  const defaults = {
     origin: { y: 0.7 },
   };
 
@@ -54,12 +58,6 @@ const Video: React.FC<VideoProps> = ({ setTitle, setProgress }) => {
     state: { video },
   } = useLocation() as { state: { video: Blob } };
 
-  const [downloadUrl, setDownloadUrl] = useState<string>();
-
-  useEffect(() => {
-    setDownloadUrl(URL.createObjectURL(video));
-  }, [video]);
-
   const handleShare: (video: Blob) => void = (video: Blob) => {
     const shareData = {
       files: [new File([video], "video.mp4", { type: "video/mp4" })],
@@ -92,21 +90,19 @@ const Video: React.FC<VideoProps> = ({ setTitle, setProgress }) => {
         }}
       >
         <IonCard style={{ maxWidth: "25rem", padding: "0.7rem" }}>
-          <video id="video" controls style={{ maxWidth: "100%" }} autoPlay>
-            <source src={URL.createObjectURL(video)} type="video/mp4" />
-          </video>
+          {video ? (
+            <ReactPlayer
+              style={{ maxWidth: "100%" }}
+              url={URL.createObjectURL(video)}
+              controls
+            />
+          ) : null}
         </IonCard>
 
-        <IonButton
-          color="secondary"
-          expand="block"
-          style={{ padding: "1rem 0" }}
-          onClick={() => handleShare(video)}
-        >
-          分享 / 下載
-        </IonButton>
+        <Button text={"分享 / 下載"} clickFunction={() => handleShare(video)} />
       </div>
     </>
   );
 };
+
 export default Video;

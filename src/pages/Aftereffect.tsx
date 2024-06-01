@@ -7,13 +7,8 @@ import {
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import {
-  image_to_image,
-  prompt_to_prompt,
-  to_video,
-  voice_to_text,
-} from "../utils/utils";
-import AudioRecorder from "../components/audioRecorder";
+import { image_to_image, prompt_to_prompt, to_video } from "../utils/utils";
+import AudioRecorder from "../components/AudioRecorder";
 
 interface AftereffectProps {
   setTitle: (title: string) => void;
@@ -41,7 +36,7 @@ const Aftereffect: React.FC<AftereffectProps> = ({
 
   const stableGen = async () => {
     setLoading(true);
-    present("AI施法中...");
+    present("AI施法中...(約15秒)");
     const newPrompt = await prompt_to_prompt(prompt);
     const gen_image = await image_to_image(originalImg, newPrompt);
     const gen_video = await to_video(gen_image, recording!);
@@ -91,11 +86,7 @@ const Aftereffect: React.FC<AftereffectProps> = ({
             </IonButton>
           </>
         ) : null}
-        <AudioRecorder
-          setPrompt={setPrompt}
-          setRecording={setRecording}
-          recording={recording}
-        />
+        <AudioRecorder setTargetText={setPrompt} setRecording={setRecording} />
       </div>
     </>
   );

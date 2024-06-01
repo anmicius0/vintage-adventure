@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { IonButton, IonText, IonSearchbar } from "@ionic/react";
+import { IonText, IonSearchbar } from "@ionic/react";
 import { useHistory } from "react-router-dom";
+
 import { find_place } from "../utils/utils";
+import Button from "../components/Button";
+import AudioRecorder from "../components/AudioRecorder";
 
 interface HomeProps {
   setTitle: (title: string) => void;
@@ -13,15 +16,20 @@ const Home: React.FC<HomeProps> = ({ setTitle, setLoading, setProgress }) => {
   useEffect(() => {
     setTitle("第一步：找地點");
     setProgress(0);
-  }, []);
+  }, [setTitle, setProgress]);
 
   const [query, setQuery] = useState<string>("");
   const history = useHistory();
   const search = async (query: string) => {
-    setLoading(true);
-    const location = await find_place(query);
-    setLoading(false);
-    history.push(`/streetview?${new URLSearchParams(location).toString()}`);
+    try {
+      setLoading(true);
+      const location = await find_place(query);
+      history.push(`/streetview?${new URLSearchParams(location).toString()}`);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -45,15 +53,14 @@ const Home: React.FC<HomeProps> = ({ setTitle, setLoading, setProgress }) => {
           fontWeight: "300",
         }}
       />
-      <IonButton
-        color="secondary"
-        expand="block"
-        onClick={() => {
+      <Button
+        text={"搜尋地點"}
+        clickFunction={() => {
           if (query) search(query);
         }}
-      >
-        搜尋地點
-      </IonButton>
+      />
+
+      <AudioRecorder setTargetText={setQuery} />
     </>
   );
 };
