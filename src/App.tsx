@@ -47,8 +47,8 @@ const App: React.FC = () => {
   return (
     <IonApp>
       <IonPage>
-        <IonHeader>
-          <IonToolbar color="primary">
+        <IonHeader className="ion-no-border">
+          <IonToolbar>
             <IonTitle style={{ fontFamily: "Noto Sans TC", fontWeight: "300" }}>
               {title}
             </IonTitle>

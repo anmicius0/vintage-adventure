@@ -86,10 +86,15 @@
     border-radius: 0.5rem !important;
 }
 
-ion-button {
-    max-width: 40rem;
-    margin: 0 auto;
-    padding: 1rem 1rem;
-    font-family: "Noto Sans TC", sans-serif;
-    font-weight: 300;
+ion-router-outlet {
+    overflow: scroll !important;
+}
+
+.voice-visualizer__btn, .voice-visualizer__btn-left, .voice-visualizer__btn-container {
+    display: none !important;
+}
+
+.voice-visualizer__btn-container {
+    display: flex;
+    justify-content: center;
 }
