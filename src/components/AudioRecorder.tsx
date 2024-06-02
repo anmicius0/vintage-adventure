@@ -10,7 +10,6 @@ interface Props {
 }
 
 const AudioRecorder: React.FC<Props> = ({ setTargetText, setRecording }) => {
-  const [taiwanese, setTaiwanese] = useState<boolean>(false);
   const [present, dismiss] = useIonLoading();
 
   const recorderControls = useVoiceVisualizer();
@@ -27,7 +26,7 @@ const AudioRecorder: React.FC<Props> = ({ setTargetText, setRecording }) => {
     if (setRecording) {
       setRecording(audio);
     }
-    const transcript = await voice_to_text(audio, taiwanese);
+    const transcript = await voice_to_text(audio);
     setTargetText(transcript);
     await dismiss();
   };
@@ -41,14 +40,6 @@ const AudioRecorder: React.FC<Props> = ({ setTargetText, setRecording }) => {
         alignItems: "center",
       }}
     >
-      <IonToggle
-        color="secondary"
-        style={{ marginTop: "1rem" }}
-        checked={taiwanese}
-        onIonChange={() => setTaiwanese(!taiwanese)}
-      >
-        台語
-      </IonToggle>
       <VoiceVisualizer
         height="0"
         controlButtonsClassName="recorder-controls"

@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 
 import { find_place } from "../utils/utils";
 import Button from "../components/Button";
-import AudioRecorder from "../components/AudioRecorder";
 
 interface HomeProps {
   setTitle: (title: string) => void;
@@ -59,8 +58,6 @@ const Home: React.FC<HomeProps> = ({ setTitle, setLoading, setProgress }) => {
           if (query) search(query);
         }}
       />
-
-      <AudioRecorder setTargetText={setQuery} />
     </>
   );
 };
