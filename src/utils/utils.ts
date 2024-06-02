@@ -36,13 +36,10 @@ export const get_street_view = async (
 };
 
 // Aftereffect.tsx
-export const voice_to_text = async (
-  audio: Blob,
-  taiwanese: Boolean
-): Promise<string> => {
+export const voice_to_text = async (audio: Blob): Promise<string> => {
   const formData = new FormData();
   formData.append("audio", audio, "audio.webm");
-  formData.append("language", taiwanese ? "tw" : "zh");
+  formData.append("language", "zh");
   const res = await fetch(`${API_URL}/stt`, {
     method: "POST",
     body: formData,
