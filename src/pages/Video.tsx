@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { IonCard } from "@ionic/react";
 import confetti from "canvas-confetti";
-import ReactPlayer from "react-player";
 
 import Button from "../components/Button";
 
@@ -90,13 +89,12 @@ const Video: React.FC<VideoProps> = ({ setTitle, setProgress }) => {
         }}
       >
         <IonCard style={{ maxWidth: "25rem", padding: "0.7rem" }}>
-          {video ? (
-            <ReactPlayer
-              style={{ maxWidth: "100%" }}
-              url={URL.createObjectURL(video)}
-              controls
-            />
-          ) : null}
+          <video
+            src={URL.createObjectURL(video)}
+            controls
+            autoPlay
+            style={{ maxWidth: "100%" }}
+          ></video>
         </IonCard>
 
         <Button text={"分享 / 下載"} clickFunction={() => handleShare(video)} />
