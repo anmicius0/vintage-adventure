@@ -77,10 +77,16 @@ export const image_to_image = async (
   return new Blob([await res.arrayBuffer()], { type: "image/jpeg" });
 };
 
-export const to_video = async (image: Blob, audio: Blob): Promise<Blob> => {
+export const to_video = async (
+  image: Blob,
+  audio: Blob,
+  prompt: string
+): Promise<Blob> => {
   const formData = new FormData();
   formData.append("image", image, "image.jpeg");
   formData.append("audio", audio, "audio.ogg");
+  formData.append("prompt", prompt);
+
   const res = await fetch(`${API_URL}/to-video`, {
     method: "POST",
     body: formData,

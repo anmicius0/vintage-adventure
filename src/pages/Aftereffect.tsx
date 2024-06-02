@@ -39,7 +39,7 @@ const Aftereffect: React.FC<AftereffectProps> = ({
     present("AI施法中...(約15秒)");
     const newPrompt = await prompt_to_prompt(prompt);
     const gen_image = await image_to_image(originalImg, newPrompt);
-    const gen_video = await to_video(gen_image, recording!);
+    const gen_video = await to_video(gen_image, recording!, prompt);
     dismiss();
     setLoading(false);
     history.push({
